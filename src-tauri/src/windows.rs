@@ -188,6 +188,9 @@ pub fn get_window(center: bool, to_mouse_position: bool, set_focus: bool) -> tau
         window.center().unwrap();
     }
 
+    #[cfg(debug_assertions)]
+    window.open_devtools();
+
     window
 }
 

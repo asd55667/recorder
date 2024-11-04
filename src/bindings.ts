@@ -13,6 +13,9 @@ async clearConfigCache() : Promise<void> {
 },
 async getWindowAlwaysOnTop() : Promise<boolean> {
     return await TAURI_INVOKE("get_window_always_on_top");
+},
+async updateConfig(configContent: string) : Promise<void> {
+    await TAURI_INVOKE("update_config", { configContent });
 }
 }
 
@@ -20,11 +23,9 @@ async getWindowAlwaysOnTop() : Promise<boolean> {
 
 
 export const events = __makeEvents__<{
-configUpdatedEvent: ConfigUpdatedEvent,
 pinnedFromTrayEvent: PinnedFromTrayEvent,
 pinnedFromWindowEvent: PinnedFromWindowEvent
 }>({
-configUpdatedEvent: "config-updated-event",
 pinnedFromTrayEvent: "pinned-from-tray-event",
 pinnedFromWindowEvent: "pinned-from-window-event"
 })
@@ -35,7 +36,6 @@ pinnedFromWindowEvent: "pinned-from-window-event"
 
 /** user-defined types **/
 
-export type ConfigUpdatedEvent = null
 export type PinnedFromTrayEvent = { pinned: boolean }
 export type PinnedFromWindowEvent = { pinned: boolean }
 

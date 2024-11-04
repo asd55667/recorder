@@ -1,5 +1,5 @@
 [package]
-name = "recorder"
+name = "wcw-recorder"
 version = "0.1.0"
 description = "A Tauri App"
 authors = ["you"]
@@ -24,7 +24,7 @@ tauri = { version = "2", features = [
     "protocol-asset",
     "macos-private-api",
     "tray-icon",
-    "image-ico",
+    "image-png",
 ] }
 tauri-plugin-shell = "2"
 tauri-plugin-notification = "2"
@@ -45,11 +45,11 @@ tauri-specta = { version = "=2.0.0-rc.20", features = ["derive", "typescript"] }
 specta-typescript = "0.0.7"
 debug_print = "1.0.0"
 mouse_position = "0.1.4"
-opencv = "0.93" # For capturing the camera
+# opencv = "0.93" # For capturing the camera
 image = "0.25" # For image processing
-vpx-encode = { path = "../vpx-encode", version = "0.6", features = ["vp9"] }
+vpx-encode = { path = "../../vpx-encode", version = "0.6", features = ["vp9"] }
 webm = "1"
-xcap = { path = "../xcap" }
+xcap = { path = "../../xcap" }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 cocoa = "0.26"

@@ -4,8 +4,9 @@
 mod config;
 mod tray;
 mod windows;
+mod recorder;
 
-use crate::config::{clear_config_cache, get_config_content};
+use crate::config::{clear_config_cache, get_config_content, update_config};
 use crate::windows::get_window_always_on_top;
 
 use parking_lot::Mutex;
@@ -34,6 +35,7 @@ pub static CPU_VENDOR: Mutex<String> = Mutex::new(String::new());
 pub static APP_HANDLE: once_cell::sync::OnceCell<tauri::AppHandle> =
     once_cell::sync::OnceCell::new();
 pub static ALWAYS_ON_TOP: AtomicBool = AtomicBool::new(false);
+pub static RECORDING: AtomicBool = AtomicBool::new(false);
 
 fn main() {
     let mut sys = sysinfo::System::new();
@@ -49,6 +51,7 @@ fn main() {
             get_config_content,
             clear_config_cache,
             get_window_always_on_top,
+            update_config,
         ])
         .events(tauri_specta::collect_events![
             PinnedFromWindowEvent,
@@ -104,11 +107,6 @@ fn main() {
                 tray::create_tray(&handle).unwrap();
             });
 
-            let handle = app_handle.clone();
-            ConfigUpdatedEvent::listen_any(app_handle, move |_event| {
-                clear_config_cache();
-                tray::create_tray(&handle).unwrap();
-            });
             Ok(())
         })
         .build(tauri::generate_context!())
