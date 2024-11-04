@@ -50,6 +50,8 @@ image = "0.25" # For image processing
 vpx-encode = { path = "../../vpx-encode", version = "0.6", features = ["vp9"] }
 webm = "1"
 xcap = { path = "../../xcap" }
+num_cpus = "1.16"
+crossbeam = "0.8.4"
 
 [target.'cfg(target_os = "macos")'.dependencies]
 cocoa = "0.26"
