@@ -52,6 +52,18 @@ webm = "1"
 xcap = { path = "../../xcap" }
 num_cpus = "1.16"
 crossbeam = "0.8.4"
+cpal = "0.15"
+ringbuf = "0.4" # For audio buffer management
+lazy_static = "1.4"
+dasp = { version = "0.11", features = [
+    "signal",
+    "interpolate-linear",
+    "interpolate",
+], optional = true }
+anyhow = "1.0"
+opus = "0.3"
+fon = "0.6"
+chrono = "0.4"
 
 [target.'cfg(target_os = "macos")'.dependencies]
 cocoa = "0.26"
@@ -74,3 +86,7 @@ windows = { version = "0.56.0", features = [
     "Storage",
     "Storage_Streams",
 ] }
+
+[features]
+use_dasp = ["dasp"]
+default = ["use_dasp"]
